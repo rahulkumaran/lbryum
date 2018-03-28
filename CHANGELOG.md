@@ -12,15 +12,15 @@ labeled as 2.7.1. Subsequent releases will follow
   *
 
 ### Fixed
-  * Fixed a callback that was raising KeyError while parsing address history from server, which could potentially hang the network thread.
+  *
+  *
 
 ### Deprecated
   *
   *
 
 ### Changed
-  * Transaction fee now takes into consideration claims the same as lbrycrd patch https://github.com/lbryio/lbrycrd/pull/95
-  * Extracted timeout to a constant, raised its value and fixed it to check if the server is responsive before disconnecting
+  *
   *
 
 ### Added
@@ -30,6 +30,15 @@ labeled as 2.7.1. Subsequent releases will follow
 ### Removed
   *
   *
+
+
+## [3.2.1] - 2018-03-28
+### Fixed
+ * Fixed a callback that was raising KeyError while parsing address history from server, which could potentially hang the network thread.
+
+### Changed
+ * Transaction fee now takes into consideration claims the same as lbrycrd patch https://github.com/lbryio/lbrycrd/pull/95
+ * Extracted timeout to a constant, raised its value and fixed it to check if the server is responsive before disconnecting
 
 
 ## [3.2.0] - 2018-03-20
