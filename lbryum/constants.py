@@ -23,7 +23,7 @@ HEADER_SIZE = 112
 BLOCKS_PER_CHUNK = 96
 CLAIM_ID_SIZE = 20
 
-HEADERS_URL = "https://s3.amazonaws.com/lbry-blockchain-headers/blockchain_headers_latest"
+HEADERS_URL = "https://headers.lbry.io/blockchain_headers_latest"
 
 DEFAULT_PORTS = {'t': '50001', 's': '50002', 'h': '8081', 'g': '8082'}
 NODES_RETRY_INTERVAL = 60
