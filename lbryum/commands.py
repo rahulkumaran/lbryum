@@ -1782,8 +1782,9 @@ class Commands(object):
             # put the fetched certificate claims into the claims dictionary for use validating
             # the signatures of the claims in the wallet
             for _claim_id in needed_cert_results:
-                claims[_claim_id] = needed_cert_results[_claim_id]
-                claims[_claim_id]['value'] = smart_decode(needed_cert_results[_claim_id]['value'])
+                if needed_cert_results[_claim_id]: # the claim might be abandonded in which case we get {}
+                    claims[_claim_id] = needed_cert_results[_claim_id]
+                    claims[_claim_id]['value'] = smart_decode(needed_cert_results[_claim_id]['value'])
 
         # use pre-decoded ClaimDicts rather than decoding them each time we call
         # offline_parse_and_validate_claim_result
