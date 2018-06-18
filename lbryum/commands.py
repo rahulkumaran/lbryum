@@ -2090,7 +2090,7 @@ class Commands(object):
             return {'error': 'claim is not a certificate', 'success': False}
         if not certificate_claim_obj.validate_private_key(signing_key, certificate_id):
             return {'error': 'private key does not match certificate', 'success': False}
-        self.wallet.save_certificate(certificate_id, signing_key)
+        self.wallet.save_certificate(certificate_id, signing_key, write=True)
         return {'success': True}
 
     @command('wpn')
