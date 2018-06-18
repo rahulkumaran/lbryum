@@ -13,7 +13,7 @@ labeled as 2.7.1. Subsequent releases will follow
 
 ### Fixed
   * `getnameclaims` raising an error when a signing certificate used in one of the claims has been abandoned (https://github.com/lbryio/lbryum/issues/193)
-  *
+  *`importcertificateinfo` not writing to the wallet file immediately (fixes https://github.com/lbryio/lbry/issues/1231)
 
 ### Deprecated
   *
