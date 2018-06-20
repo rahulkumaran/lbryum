@@ -6,4 +6,4 @@ six>=1.9.0
 slowaes==0.1a1
 appdirs==1.4.3
 keyring==10.4.0
-git+https://github.com/lbryio/lbryschema.git@v0.0.16rc3#egg=lbryschema
+git+https://github.com/lbryio/lbryschema.git@remove_leftovers_from_verifier_port#egg=lbryschema
