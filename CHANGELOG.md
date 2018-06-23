@@ -32,6 +32,10 @@ labeled as 2.7.1. Subsequent releases will follow
   *
 
 
+## [3.2.3] - 2018-06-23
+### Changed
+ * Bumped `lbryschema` requirement to 0.0.16 [see changelog](https://github.com/lbryio/lbryschema/blob/master/CHANGELOG.md#0016---2018-06-23)
+
 ## [3.2.2] - 2018-06-19
 ### Fixed
  * `getnameclaims` raising an error when a signing certificate used in one of the claims has been abandoned (https://github.com/lbryio/lbryum/issues/193)
