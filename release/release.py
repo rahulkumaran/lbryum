@@ -152,7 +152,7 @@ def get_gh_token():
     else:
         print """
 Please enter your personal access token. If you don't have one
-See https://github.com/lbryio/lbry-app/wiki/Release-Script#generate-a-personal-access-token
+See https://github.com/lbryio/lbry/wiki/Release-Script#generate-a-personal-access-token
 for instructions on how to generate one.
 
 You can also set the GH_TOKEN environment variable to avoid seeing this message
