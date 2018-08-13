@@ -12,7 +12,7 @@ labeled as 2.7.1. Subsequent releases will follow
   *
 
 ### Fixed
-  * starting the network locking up when a missing transaction doesn't exist
+  *
   *
 
 ### Deprecated
@@ -30,6 +30,11 @@ labeled as 2.7.1. Subsequent releases will follow
 ### Removed
   *
   *
+
+
+## [3.2.4] - 2018-08-13
+### Fixed
+ * starting the network locking up when a missing transaction doesn't exist
 
 
 ## [3.2.3] - 2018-06-23
