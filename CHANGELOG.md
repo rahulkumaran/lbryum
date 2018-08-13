@@ -12,7 +12,7 @@ labeled as 2.7.1. Subsequent releases will follow
   *
 
 ### Fixed
-  *
+  * starting the network locking up when a missing transaction doesn't exist
   *
 
 ### Deprecated

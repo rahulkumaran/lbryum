@@ -100,25 +100,32 @@ class Synchronizer(ThreadJob):
         # Remove request; this allows up_to_date to be True
         self.requested_histories.pop(addr)
 
-    def tx_response(self, response):
-        params, result = self.parse_response(response)
-        if not params:
-            return
-        tx_hash, tx_height = params
-        assert tx_hash == hash_encode(Hash(result.decode('hex')))
-        tx = Transaction(result)
-        try:
-            tx.deserialize()
-        except Exception:
-            log.info("cannot deserialize transaction, skipping: %s", tx_hash)
-            return
-        self.wallet.receive_tx_callback(tx_hash, tx, tx_height)
-        self.requested_tx.remove((tx_hash, tx_height))
-        log.info("received tx %s height: %d bytes: %d", tx_hash, tx_height, len(tx.raw))
-        # callbacks
-        self.network.trigger_callback('new_transaction', tx)
-        if not self.requested_tx:
-            self.network.trigger_callback('updated')
+    def get_tx_response_callback(self, tx_hash, tx_height):
+        txid, height = tx_hash, tx_height
+
+        def tx_response(response):
+            params, result = self.parse_response(response)
+            if not params:
+                log.warning("failed to get %s", txid)
+                self.requested_tx.remove((txid, height))
+                return
+            tx_hash, tx_height = params
+            assert tx_hash == hash_encode(Hash(result.decode('hex')))
+            tx = Transaction(result)
+            try:
+                tx.deserialize()
+            except Exception:
+                log.info("cannot deserialize transaction, skipping: %s", tx_hash)
+                return
+            self.wallet.receive_tx_callback(tx_hash, tx, tx_height)
+            self.requested_tx.remove((tx_hash, tx_height))
+            log.info("received tx %s height: %d bytes: %d", tx_hash, tx_height, len(tx.raw))
+            # callbacks
+            self.network.trigger_callback('new_transaction', tx)
+            if not self.requested_tx:
+                self.network.trigger_callback('updated')
+
+        return tx_response
 
     def request_missing_txs(self, hist):
         # "hist" is a list of [tx_hash, tx_height] lists
@@ -128,8 +135,9 @@ class Synchronizer(ThreadJob):
                 missing.add((tx_hash, tx_height))
         missing -= self.requested_tx
         if missing:
-            requests = [('blockchain.transaction.get', tx) for tx in missing]
-            self.network.send(requests, self.tx_response)
+            for (tx_hash, tx_height) in missing:
+                self.network.send([('blockchain.transaction.get', (tx_hash, tx_height))],
+                                  self.get_tx_response_callback(tx_hash, tx_height))
             self.requested_tx |= missing
 
     def initialize(self):
